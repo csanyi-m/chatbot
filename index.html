@@ -8,12 +8,21 @@
 </head>
 <body>
   <div class="container">
-    <h1>Üdv a Chatbot projekt oldalon! 🤖</h1>
-    <p>Ez egy próba weboldal a GitHub Pages segítségével. A későbbiekben itt lesz elérhető a chatbot.</p>
-    
-    <div class="chat-box">
-      <p class="chat-placeholder">💬 Ide fog érkezni a chatbot válasza...</p>
+    <h1>Chatbot projekt 🤖</h1>
+    <p>Adj meg egy linket, amelyből a chatbot tanulhat:</p>
+
+    <input type="text" id="urlInput" placeholder="https://valami.hu/cikk" style="width: 100%; padding: 0.5rem;">
+    <button id="load-button">📥 Link betöltése</button>
+
+    <p style="margin-top: 1rem;">Írj egy kérdést a chatmezőbe:</p>
+    <input type="text" id="ask-input" placeholder="Mit szeretnél tudni?" style="width: 100%; padding: 0.5rem;">
+
+    <div class="chat-box" id="response">
+      <p class="chat-placeholder">💬 A chatbot válasza itt fog megjelenni...</p>
     </div>
   </div>
+
+  <!-- Külső JavaScript fájl bekötése -->
+  <script src="script.js"></script>
 </body>
 </html>
