@@ -1,41 +1,56 @@
 :root {
-  --bg: #1e1e2e;
+  --bg1: #1e1e2e;
+  --bg2: #181825;
   --fg: #cdd6f4;
   --accent: #89b4fa;
+  --chat-bg: #313244;
+  --chat-border: #585b70;
   --font: 'Segoe UI', sans-serif;
 }
 
 body {
-  background-color: var(--bg);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
   color: var(--fg);
   font-family: var(--font);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 2rem;
-  min-height: 100vh;
-  margin: 0;
+}
+
+.container {
+  max-width: 600px;
+  width: 90%;
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
   color: var(--accent);
 }
 
 p {
-  font-size: 1.2rem;
-  max-width: 600px;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
 
-@media (max-width: 600px) {
-  h1 {
-    font-size: 1.8rem;
-  }
+/* 💬 Chat ablak stílus */
+.chat-box {
+  background-color: var(--chat-bg);
+  border: 1px solid var(--chat-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 0 10px #00000033;
+  height: 300px;
+  overflow-y: auto;
+}
 
-  p {
-    font-size: 1rem;
-  }
+/* Üzenet helyőrző */
+.chat-placeholder {
+  color: #a6adc8;
+  font-style: italic;
 }
