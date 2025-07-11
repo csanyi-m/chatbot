@@ -2,7 +2,7 @@ let password = "";
 const apiUrl = "https://chatbot-api-proxy.vercel.app/api";
 let sourceText = "";
 
-// Jelszó ellenőrzése
+// 🔐 Jelszó ellenőrzése
 function verifyPassword() {
   const input = document.getElementById("passwordInput").value.trim();
   if (!input) return;
@@ -20,7 +20,7 @@ function verifyPassword() {
     .then(res => res.json())
     .then(data => {
       if (data.reply || data.success) {
-        // Jelszó helyes → megjelenik a chatbot
+        // Jelszó helyes → elrejtjük a belépőt, megjelenítjük a chatbotot
         document.querySelector(".password-container").style.display = "none";
         document.getElementById("chatContainer").style.display = "block";
       } else {
@@ -33,6 +33,7 @@ function verifyPassword() {
     });
 }
 
+// 🌐 Link betöltése
 async function fetchTextFromUrl() {
   const url = document.getElementById("urlInput").value;
   try {
@@ -48,6 +49,7 @@ async function fetchTextFromUrl() {
   }
 }
 
+// 🤖 Kérdés megválaszolása
 async function answerQuestion() {
   const question = document.getElementById("questionInput").value.trim();
 
