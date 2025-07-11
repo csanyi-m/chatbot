@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chatbot Projekt</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <!-- 🔒 Jelszókérő rész -->
+  <div class="password-container">
+    <h2>🔐 Kérlek, add meg a jelszót a chatbot használatához:</h2>
+    <input type="password" id="passwordInput" placeholder="Jelszó..." />
+    <button onclick="verifyPassword()">Belépés</button>
+    <p id="passwordError" style="color:red;"></p>
+  </div>
+
+  <!-- 💬 Chatbot rész, kezdetben rejtve -->
+  <div class="container" id="chatContainer" style="display: none;">
     <h1>Chatbot projekt 🤖</h1>
     <p>Adj meg egy linket, amelyből a chatbot tanulhat:</p>
 
-    <input type="text" id="urlInput" placeholder="https://valami.hu/cikk" style="width: 100%; padding: 0.5rem;">
-    <button id="load-button">📥 Link betöltése</button>
+    <input type="text" id="urlInput" placeholder="https://valami.hu/cikk" />
+    <button onclick="fetchTextFromUrl()">📥 Link betöltése</button>
 
-    <p style="margin-top: 1rem;">Írj egy kérdést a chatmezőbe:</p>
-    <input type="text" id="ask-input" placeholder="Mit szeretnél tudni?" style="width: 100%; padding: 0.5rem;">
+    <p>Írj egy kérdést:</p>
+    <input type="text" id="questionInput" placeholder="Mit szeretnél tudni?" />
+    <button onclick="answerQuestion()">💬 Küldés</button>
 
-    <div class="chat-box" id="response">
+    <div class="chat-box" id="chatBox">
       <p class="chat-placeholder">💬 A chatbot válasza itt fog megjelenni...</p>
     </div>
   </div>
 
-  <!-- Külső JavaScript fájl bekötése -->
   <script src="script.js"></script>
 </body>
 </html>

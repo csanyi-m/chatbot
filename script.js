@@ -1,15 +1,38 @@
 let password = "";
 const apiUrl = "https://chatbot-api-proxy.vercel.app/api";
+let sourceText = "";
 
-// Jelszó bekérése oldal betöltéskor
-window.addEventListener("DOMContentLoaded", () => {
-  password = prompt("🔐 Add meg a hozzáférési jelszót:");
-  if (!password) {
-    alert("⛔ Nem adtál meg jelszót. Az oldal nem használható.");
-    document.getElementById("urlInput").disabled = true;
-    document.getElementById("questionInput").disabled = true;
-  }
-});
+// Jelszó ellenőrzése
+function verifyPassword() {
+  const input = document.getElementById("passwordInput").value.trim();
+  if (!input) return;
+
+  password = input;
+
+  // Egyszerű validáció: próbáljunk kérni egy üres választ
+  fetch(apiUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      prompt: "ping",
+      password: password
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.reply || data.success) {
+        // Jelszó jó, mutatjuk a chatbotot
+        document.querySelector(".password-container").style.display = "none";
+        document.getElementById("chatContainer").style.display = "block";
+      } else {
+        document.getElementById("passwordError").textContent = "❌ Hibás jelszó.";
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("passwordError").textContent = "❌ Hiba történt a kapcsolat során.";
+    });
+}
 
 async function fetchTextFromUrl() {
   const url = document.getElementById("urlInput").value;
@@ -18,7 +41,7 @@ async function fetchTextFromUrl() {
     const html = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    window.sourceText = doc.body.innerText;
+    sourceText = doc.body.innerText;
     document.getElementById("chatBox").innerHTML = `<p style="color:lightgreen;">✅ Forrás betöltve.</p>`;
   } catch (error) {
     document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ Hiba történt a forrás betöltésekor.</p>`;
@@ -29,13 +52,8 @@ async function fetchTextFromUrl() {
 async function answerQuestion() {
   const question = document.getElementById("questionInput").value.trim();
 
-  if (!window.sourceText) {
+  if (!sourceText) {
     document.getElementById("chatBox").innerHTML = "<p>❗ Előbb adj meg egy forrást.</p>";
-    return;
-  }
-
-  if (!password) {
-    document.getElementById("chatBox").innerHTML = "<p>❗ Nincs jelszó megadva.</p>";
     return;
   }
 
@@ -46,7 +64,7 @@ async function answerQuestion() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        prompt: `Csak az alábbi szöveg alapján válaszolj:\n\n${window.sourceText}\n\nKérdés: ${question}`,
+        prompt: `Csak az alábbi szöveg alapján válaszolj:\n\n${sourceText}\n\nKérdés: ${question}`,
         password: password
       })
     });
