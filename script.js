@@ -9,7 +9,6 @@ function verifyPassword() {
 
   password = input;
 
-  // Egyszerű validáció: próbáljunk kérni egy üres választ
   fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -21,7 +20,7 @@ function verifyPassword() {
     .then(res => res.json())
     .then(data => {
       if (data.reply || data.success) {
-        // Jelszó jó, mutatjuk a chatbotot
+        // Jelszó helyes → megjelenik a chatbot
         document.querySelector(".password-container").style.display = "none";
         document.getElementById("chatContainer").style.display = "block";
       } else {
