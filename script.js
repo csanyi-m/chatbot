@@ -1,4 +1,5 @@
 let password = "";
+let selectedModel = "gpt-4-turbo";
 const apiUrl = "https://chatbot-api-proxy.vercel.app/api";
 let sourceText = "";
 
@@ -20,9 +21,17 @@ function verifyPassword() {
     .then(res => res.json())
     .then(data => {
       if (data.reply || data.success) {
-        // Jelszó helyes → elrejtjük a belépőt, megjelenítjük a chatbotot
         document.querySelector(".password-container").style.display = "none";
         document.getElementById("chatContainer").style.display = "block";
+        document.getElementById("modelSelector").style.display = "block";
+
+        const modelDropdown = document.getElementById("modelDropdown");
+        if (modelDropdown) {
+          selectedModel = modelDropdown.value;
+          modelDropdown.addEventListener("change", () => {
+            selectedModel = modelDropdown.value;
+          });
+        }
       } else {
         document.getElementById("passwordError").textContent = "❌ Hibás jelszó.";
       }
@@ -42,7 +51,7 @@ async function fetchTextFromUrl() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         url: url,
-        password: password  // ez ugyanaz a jelszó, amit a belépéskor adtál meg
+        password: password
       })
     });
 
@@ -78,7 +87,8 @@ async function answerQuestion() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         prompt: `Csak az alábbi szöveg alapján válaszolj:\n\n${sourceText}\n\nKérdés: ${question}`,
-        password: password
+        password: password,
+        model: selectedModel
       })
     });
 
@@ -97,7 +107,6 @@ async function answerQuestion() {
     document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ Hálózati hiba történt.</p>`;
   }
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("passwordInput");
