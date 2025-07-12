@@ -7,27 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <body>
+
   <!-- 🔐 Jelszókérés -->
   <div class="password-container">
     <h1>Chatbot hozzáférés</h1>
     <p>Kérlek, add meg a jelszót:</p>
     <input type="password" id="passwordInput" placeholder="Jelszó">
-    <button onclick="verifyPassword()">Belépés</button>
     <div id="passwordError"></div>
   </div>
 
   <!-- 💬 Chat felület -->
   <div class="container" id="chatContainer" style="display: none;">
     <h1>Chatbot projekt 🤖</h1>
-    <p>Adj meg egy linket, amelyből a chatbot tanulhat:</p>
 
-    <input type="text" id="urlInput" placeholder="https://valami.hu/cikk" style="width: 100%; padding: 0.5rem;">
-    <button onclick="fetchTextFromUrl()">📥 Link betöltése</button>
+    <div class="input-section">
+      <input type="text" id="urlInput" placeholder="https://valami.hu/cikk">
+      <input type="text" id="questionInput" placeholder="Mit szeretnél tudni?">
 
-    <p style="margin-top: 1rem;">Írj egy kérdést a chatmezőbe:</p>
-    <input type="text" id="questionInput" placeholder="Mit szeretnél tudni?" style="width: 100%; padding: 0.5rem;">
-    <button onclick="answerQuestion()">💬 Küldés</button>
+      <div class="button-row">
+        <button id="loadBtn" onclick="fetchTextFromUrl()" title="Link betöltése">🔽</button>
+        <button id="sendBtn" onclick="answerQuestion()" title="Kérdés küldése">➤</button>
+      </div>
+    </div>
 
     <div class="chat-box" id="chatBox">
       <p class="chat-placeholder">💬 A chatbot válasza itt fog megjelenni...</p>
@@ -35,7 +36,5 @@
   </div>
 
   <script src="script.js"></script>
-</body>
-
 </body>
 </html>

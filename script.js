@@ -97,7 +97,8 @@ async function answerQuestion() {
     document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ Hálózati hiba történt.</p>`;
   }
 }
-// ⌨️ Enter gomb figyelése a mezőknél
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("passwordInput");
   const urlInput = document.getElementById("urlInput");
