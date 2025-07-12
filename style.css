@@ -122,3 +122,39 @@ p {
 .button-row button:hover {
   background-color: #74c7ec;
 }
+
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-row input[type="text"],
+.input-row input[type="password"] {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--chat-border);
+  background-color: var(--bg1);
+  color: var(--fg);
+}
+
+.input-row button {
+  background-color: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  color: var(--bg1);
+  cursor: pointer;
+  box-shadow: 0 0 8px #00000044;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.input-row button:hover {
+  background-color: #74c7ec;
+}

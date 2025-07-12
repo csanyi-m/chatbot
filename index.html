@@ -12,7 +12,10 @@
   <div class="password-container">
     <h1>Chatbot hozzáférés</h1>
     <p>Kérlek, add meg a jelszót:</p>
-    <input type="password" id="passwordInput" placeholder="Jelszó">
+    <div class="input-row">
+      <input type="password" id="passwordInput" placeholder="Jelszó">
+      <button id="loginBtn" onclick="verifyPassword()" title="Belépés">➤</button>
+    </div>
     <div id="passwordError"></div>
   </div>
 
@@ -21,11 +24,13 @@
     <h1>Chatbot projekt 🤖</h1>
 
     <div class="input-section">
-      <input type="text" id="urlInput" placeholder="https://valami.hu/cikk">
-      <input type="text" id="questionInput" placeholder="Mit szeretnél tudni?">
-
-      <div class="button-row">
+      <div class="input-row">
+        <input type="text" id="urlInput" placeholder="https://valami.hu/cikk">
         <button id="loadBtn" onclick="fetchTextFromUrl()" title="Link betöltése">🔽</button>
+      </div>
+
+      <div class="input-row">
+        <input type="text" id="questionInput" placeholder="Mit szeretnél tudni?">
         <button id="sendBtn" onclick="answerQuestion()" title="Kérdés küldése">➤</button>
       </div>
     </div>
