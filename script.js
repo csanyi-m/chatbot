@@ -37,15 +37,27 @@ function verifyPassword() {
 async function fetchTextFromUrl() {
   const url = document.getElementById("urlInput").value;
   try {
-    const response = await fetch(url);
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    sourceText = doc.body.innerText;
-    document.getElementById("chatBox").innerHTML = `<p style="color:lightgreen;">✅ Forrás betöltve.</p>`;
+    const response = await fetch("https://chatbot-api-proxy.vercel.app/api/fetch", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: url,
+        password: password  // ez ugyanaz a jelszó, amit a belépéskor adtál meg
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.content) {
+      sourceText = new DOMParser().parseFromString(data.content, "text/html").body.innerText;
+      document.getElementById("chatBox").innerHTML = `<p style="color:lightgreen;">✅ Forrás betöltve.</p>`;
+    } else {
+      document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ ${data.error || "Ismeretlen hiba történt."}</p>`;
+    }
+
   } catch (error) {
-    document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ Hiba történt a forrás betöltésekor.</p>`;
     console.error(error);
+    document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ Hiba történt a forrás betöltésekor.</p>`;
   }
 }
 
