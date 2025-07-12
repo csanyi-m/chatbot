@@ -97,3 +97,27 @@ async function answerQuestion() {
     document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ Hálózati hiba történt.</p>`;
   }
 }
+// ⌨️ Enter gomb figyelése a mezőknél
+document.addEventListener("DOMContentLoaded", () => {
+  const passwordInput = document.getElementById("passwordInput");
+  const urlInput = document.getElementById("urlInput");
+  const questionInput = document.getElementById("questionInput");
+
+  if (passwordInput) {
+    passwordInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") verifyPassword();
+    });
+  }
+
+  if (urlInput) {
+    urlInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") fetchTextFromUrl();
+    });
+  }
+
+  if (questionInput) {
+    questionInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") answerQuestion();
+    });
+  }
+});
