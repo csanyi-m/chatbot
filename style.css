@@ -158,3 +158,23 @@ p {
 .input-row button:hover {
   background-color: #74c7ec;
 }
+.formatted-answer {
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.formatted-answer pre {
+  background-color: #1e1e2e;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-top: 1em;
+}
+
+.formatted-answer code {
+  background-color: #313244;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #fab387;
+}

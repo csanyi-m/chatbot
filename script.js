@@ -95,7 +95,13 @@ async function answerQuestion() {
     const data = await response.json();
 
     if (data.reply) {
-      document.getElementById("chatBox").innerHTML = `<p><strong>💬 Válasz:</strong><br>${data.reply}</p>`;
+      const html = marked.parse(data.reply);
+      document.getElementById("chatBox").innerHTML = `
+        <div class="formatted-answer">
+          <strong>💬 Válasz:</strong><br>${html}
+        </div>
+      `;
+
     } else if (data.error) {
       document.getElementById("chatBox").innerHTML = `<p style="color:red;">❌ ${data.error}</p>`;
     } else {
